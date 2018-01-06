@@ -295,4 +295,5 @@ def main(argv=None):
         print("Authentication of user named '%s' failed." % username)
         raise SystemExit(2)
 
-    print("Authentication successful, the user is member of the following groups: %s" % ', '.join(result.get("groups", [])))
+    groups = [group[0] for group in result.get('groups', [])]
+    print("Authentication successful, the user is member of the following groups: %s" % ', '.join(groups))
