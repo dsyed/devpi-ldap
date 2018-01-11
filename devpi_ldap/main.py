@@ -178,7 +178,7 @@ class LDAP(dict):
             elif any(attribute_name in x.get('attributes', {}) for x in conn.response):
                 def extract_search(s):
                     if 'attributes' in s:
-                        return [s['attributes'][attribute_name]]
+                        return s['attributes'][attribute_name]
                     else:
                         return []
             else:
@@ -295,5 +295,4 @@ def main(argv=None):
         print("Authentication of user named '%s' failed." % username)
         raise SystemExit(2)
 
-    groups = [group[0] for group in result.get('groups', [])]
-    print("Authentication successful, the user is member of the following groups: %s" % ', '.join(groups))
+    print("Authentication successful, the user is member of the following groups: %s" % ', '.join(result.get('groups', [])))
